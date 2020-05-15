@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 export default class Postform extends Component {
     constructor(props){
         super(props);
@@ -20,6 +20,9 @@ export default class Postform extends Component {
             body:this.state.body,
         };
         // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        // NOTE:
+        // NOTE: this code works just that the jsonplaceholder server might be down.
+        // NOTE:
         fetch('https://jsonplaceholder.typicode.com/posts',
         { method:'POST',
           headers:{ 
