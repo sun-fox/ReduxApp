@@ -1,6 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {createPost} from '../actions/postActions'
+
 // import axios from 'axios'
-export default class Postform extends Component {
+class Postform extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -23,20 +27,23 @@ export default class Postform extends Component {
         // NOTE:
         // NOTE: this code works just that the jsonplaceholder server might be down.
         // NOTE:
-        fetch('https://jsonplaceholder.typicode.com/posts',
-        { method:'POST',
-          headers:{ 
-              "Access-Control-Allow-Origin": "*",
-              'content-type':'application/json'
-          },
-          body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>console.log(data));
+        // fetch('https://jsonplaceholder.typicode.com/posts',
+        // { method:'POST',
+        //   headers:{ 
+        //       "Access-Control-Allow-Origin": "*",
+        //       'content-type':'application/json'
+        //   },
+        //   body:JSON.stringify(post)
+        // })
+        // .then(res=>res.json())
+        // .then(data=>console.log(data));
         // axios.post('https://jsonplaceholder.typicode.com/posts',{
         //     title:this.state.title,
         //     body:this.state.body,
         // }).then(res=>console.log(res))
+
+        // Implementing the above requests with REDUX below:
+        this.props.createPost(post);
     }
     render() {
         return (
@@ -58,3 +65,9 @@ export default class Postform extends Component {
         )
     }
 }
+
+Postform.propTypes = {
+    createPost: PropTypes.func.isRequired
+};
+
+export default connect(null,{createPost})(Postform);
